@@ -52,6 +52,13 @@ def load_config():
 
     app_config = common_config["apps"][app_name]
     capabilities = devices[profile_name].copy()
+    device_id = os.getenv("DEVICE_ID")
+    if device_id is not None:
+        device_id = device_id.strip()
+        if not device_id:
+            raise ValueError("DEVICE_ID must not be empty")
+        capabilities["udid"] = device_id
+
     capabilities["appium:app"] = str(PROJECT_ROOT / app_config["path"])
 
     return {

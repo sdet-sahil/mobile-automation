@@ -65,6 +65,7 @@ CAPTURE_TEST_VIDEOS=true pytest
 | Environment defaults | `configuration/environments/<name>.json` | `local` |
 | Environment to load | `TEST_ENV` | `local` |
 | Device profile to use | `DEVICE_PROFILE` | Environment's `default_device` |
+| Android device UDID override | `DEVICE_ID` | Profile's configured `udid` |
 | Capture ADB logs | `CAPTURE_ADB_LOGS` | `true` |
 | Capture test videos | `CAPTURE_TEST_VIDEOS` | `false` |
 
