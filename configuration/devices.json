@@ -1,0 +1,22 @@
+{
+  "Redmi_Note10S": {
+    "platformName": "Android",
+    "automationName": "UiAutomator2",
+    "deviceName": "Redmi_Note10S",
+    "udid": "RC9DBEX8EA8PTKOV",
+    "noReset": false,
+    "newCommandTimeout": 120,
+    "appium:appWaitActivity": "*",
+    "appium:appWaitDuration": 30000,
+    "appium:ignoreHiddenApiPolicyError": true,
+    "appium:autoGrantPermissions": true
+  },
+  "iPhone": {
+    "platformName": "iOS",
+    "automationName": "XCUITest",
+    "deviceName": "My_iPhone",
+    "udid": "REPLACE_WITH_IPHONE_UDID",
+    "noReset": false,
+    "newCommandTimeout": 120
+  }
+}

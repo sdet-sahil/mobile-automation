@@ -1,0 +1,10 @@
+{
+  "appium_server_url": "http://127.0.0.1:4723",
+  "default_app": "demo_app",
+  "apps": {
+    "demo_app": {
+      "platform": "Android",
+      "path": "apk/demo.apk"
+    }
+  }
+}
