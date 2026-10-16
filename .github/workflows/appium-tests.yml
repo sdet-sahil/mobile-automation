@@ -52,21 +52,22 @@ jobs:
             ~/.android/avd/*
             ~/.android/adb*
           key: avd-api29-mac-${{ runner.os }}
-
-      - name: Run Android Emulator and Execute Tests
+        
+      - name: Run Android Emulator & Execute Pytest
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 29
-          target: default            # Do NOT use 'google_apis' unless strictly required, standard 'default' boots faster
+          target: google_apis
           arch: x86_64
+          profile: pixel_4
+          disable-animations: true
           force-avd-creation: false
-          disable-animations: true   # Drastically cuts down boot timeouts
-          emulator-options: -no-window -gpu swiftshader_indirect -no-audio -no-boot-anim -camera-back none
+          emulator-boot-timeout : 600
           script: |
-            echo "Emulator initialized successfully."
+            adb devices
             pytest tests/ -v
 
-            # This step runs even if the pytest step before it fails
+                  # This step runs even if the pytest step before it fails
       - name: Upload Appium Logs
         if: always() 
         uses: actions/upload-artifact@v4
