@@ -53,16 +53,17 @@ jobs:
             ~/.android/adb*
           key: avd-api29-mac-${{ runner.os }}
 
-      # LAYER 4: Execute Pytest inside the Emulator Runner
       - name: Run Android Emulator and Execute Tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 29
-          target: default
+          target: default            # Do NOT use 'google_apis' unless strictly required, standard 'default' boots faster
           arch: x86_64
           force-avd-creation: false
+          disable-animations: true   # Drastically cuts down boot timeouts
+          emulator-options: -no-window -gpu swiftshader_indirect -no-audio -no-boot-anim -camera-back none
           script: |
-            echo "Emulator is ready. Running Pytest..."
+            echo "Emulator initialized successfully."
             pytest tests/ -v
 
             # This step runs even if the pytest step before it fails
