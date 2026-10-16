@@ -17,6 +17,8 @@ class ProductDetailsPage(BasePage):
         locator = self.locator_for(
             ProductDetailsLocators.ADD_TO_CART_BUTTON
         )
+        if self.platform == "android":
+            self.scroll_to_element(locator)
         self.click(locator)
 
     def get_product_description(self):

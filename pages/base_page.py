@@ -58,10 +58,21 @@ class BasePage:
             return False
 
     def scroll_to_element(self, locator):
+        strategy, value = locator
+        escaped_value = value.replace("\\", "\\\\").replace('"', '\\"')
+        if strategy == AppiumBy.ACCESSIBILITY_ID:
+            selector = f'new UiSelector().description("{escaped_value}")'
+        elif strategy == AppiumBy.ID:
+            selector = f'new UiSelector().resourceId("{escaped_value}")'
+        else:
+            raise ValueError(
+                f"Unsupported Android scroll locator strategy: {strategy}"
+            )
+
         self.driver.find_element(
-        AppiumBy.ANDROID_UIAUTOMATOR,
-        'new UiScrollable(new UiSelector().scrollable(true))'
-        '.scrollIntoView(new UiSelector().resourceId("' + locator[1] + '"))'
+            AppiumBy.ANDROID_UIAUTOMATOR,
+            "new UiScrollable(new UiSelector().scrollable(true))"
+            f".scrollIntoView({selector})",
         )
     
     def open_hamburger_menu(self):
@@ -84,6 +95,5 @@ class BasePage:
         return self.wait.until(
             EC.visibility_of_element_located(self.LOGOUT_BUTTON)
         ).is_displayed()
-
 
 
