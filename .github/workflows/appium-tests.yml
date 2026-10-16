@@ -58,7 +58,7 @@ jobs:
             ~/.android/adb*
           key: avd-api29-${{ runner.os }}
         
-      - name: Start emulator and run Maestro tests
+      - name: Start emulator and run appium tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 34
@@ -77,10 +77,7 @@ jobs:
           script: |
             adb devices
             DEVICE_ID="$(adb devices | awk 'NR > 1 && $2 == "device" && $1 ~ /^emulator-/ { print $1; exit }')"
-            if [ -z "$DEVICE_ID" ]; then
-              echo "No authorized Android emulator found in adb devices." >&2
-              exit 1
-            fi
+            if [ -z "$DEVICE_ID" ]; then echo "No authorized Android emulator found in adb devices." >&2; exit 1; fi
             export DEVICE_ID
             pytest tests/ -v
 
