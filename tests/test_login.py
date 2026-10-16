@@ -5,7 +5,7 @@ from pages.products_page import ProductsPage
 from pages.product_details_page import ProductDetailsPage
 import time
 
-def test_product_description(driver):
+def test_valid_login(driver):
     products_page = ProductsPage(driver)
     product_details_page = ProductDetailsPage(driver)
     products_page.open_hamburger_menu();
@@ -18,5 +18,5 @@ def test_product_description(driver):
 
     assert products_page.get_text(
         products_page.locator_for(BaseLocators.LOGOUT_BUTTON)
-    ) == "Log ut"
+    ) == "Log Out"
     

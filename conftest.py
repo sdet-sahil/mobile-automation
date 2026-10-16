@@ -1,6 +1,6 @@
 from datetime import datetime
 import re
-
+import os , sys
 import pytest
 import pytest_html
 
@@ -12,6 +12,21 @@ from utils.adb_video_recorder import AppiumVideoRecorder
 from utils.artifact_utils import create_artifact_directories
 
 create_artifact_directories()
+
+import subprocess
+import time
+import requests
+import pytest
+from pathlib import Path
+
+def pytest_addoption(parser):
+    """Built-in hook to add custom command-line flags."""
+    parser.addoption(
+        "--manage-appium", 
+        action="store_true", 
+        default=False,
+        help="Automatically spin up and tear down a local Appium server."
+    )
 
 
 @pytest.fixture(scope="function")
@@ -92,6 +107,7 @@ def pytest_runtest_makereport(item, call):
 @pytest.fixture(autouse=True)
 def capture_test_video(request, driver):
     if not CAPTURE_TEST_VIDEOS:
+        yield
         return
     recorder = AppiumVideoRecorder(driver)
     recorder.start(request.node.name)

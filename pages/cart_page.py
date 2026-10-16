@@ -14,4 +14,4 @@ class CartPage(BasePage):
         locator = self.locator_for(
             CartLocators.cart_product(product_name)
         )
-        return self.is_visible(locator)
+        return self.is_element_visible(locator)

@@ -7,8 +7,8 @@ class ProductsPage(BasePage):
         locator = self.locator_for(
             ProductsLocators.PRODUCTS_HEADER
         )
-        return self.is_visible(locator)
-
+        return self.is_element_visible(locator)
+    
     def open_first_product(self):
         locator = self.locator_for(
             ProductsLocators.FIRST_PRODUCT

@@ -22,13 +22,6 @@ class AdbLogger:
             f"{safe_name}_{timestamp}.log"
         )
 
-        # Clear old device logs before this test.
-        subprocess.run(
-            ["adb", "logcat", "-c"],
-            check=True,
-            timeout=10,
-        )
-
         self.file_handle = self.log_file.open(
             "w", encoding="utf-8"
         )
